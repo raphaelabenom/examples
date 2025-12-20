@@ -44,13 +44,13 @@ class FetchData:
                             file.write(data)
                             pbar.update(len(data))
 
-                logger.info(f"✓ {name} baixado com sucesso!")
+                logger.info(f"{name} baixado com sucesso!")
                 downloaded_files.append(filepath)
 
             except httpx.HTTPError as e:
-                logger.error(f"✗ Erro HTTP ao baixar {name}: {e}")
+                logger.error(f"Erro HTTP ao baixar {name}: {e}")
             except Exception as e:
-                logger.error(f"✗ Erro inesperado com {name}: {e}")
+                logger.error(f"Erro inesperado com {name}: {e}")
 
         return downloaded_files
 
@@ -71,12 +71,12 @@ class FetchData:
             try:
                 with zipfile.ZipFile(filepath, "r") as zip_ref:
                     zip_ref.extractall(output_path)
-                logger.info(f"✓ {filepath.name} descompactado com sucesso!")
+                logger.info(f"{filepath.name} descompactado com sucesso!")
                 extracted_dirs.append(output_path)
             except zipfile.BadZipFile:
-                logger.error(f"✗ Arquivo corrompido: {filepath.name}")
+                logger.error(f"Arquivo corrompido: {filepath.name}")
             except Exception as e:
-                logger.error(f"✗ Erro ao descompactar {filepath.name}: {e}")
+                logger.error(f"Erro ao descompactar {filepath.name}: {e}")
 
         return extracted_dirs
 
@@ -96,10 +96,10 @@ class FetchData:
                 filepath.rename(destination)
                 moved_files.append(destination)
                 found = True
-                logger.info(f"✓ Movido: {file_name}")
+                logger.info(f"Movido: {file_name}")
 
             if not found:
-                logger.warning(f"⚠ Arquivo não encontrado: {file_name}")
+                logger.warning(f"Arquivo não encontrado: {file_name}")
 
         return moved_files
 
